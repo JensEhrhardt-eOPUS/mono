@@ -931,13 +931,11 @@ namespace System.Data.SqlClient
 				if (Client.Available <= 0)
 					return -1; // Error
 
-				IPEndPoint endpoint = CreateLocalEndpoint ();
-				if (endpoint == null)
-					return -1;
+				IPEndPoint remoteEndpoint = new IPEndPoint(IPAddress.Any, 0)
 
 				Byte [] rawrs;
 
-				rawrs = Receive (ref endpoint);
+				rawrs = Receive (ref remoteEndpoint);
 
 				string rs = Encoding.ASCII.GetString (rawrs);
 
